@@ -319,8 +319,7 @@ mock:
 - Audience demographics are not available publicly. `audience_fit` is an estimate from
   content signals and is labelled as such. The prompt tells the model not to infer
   sensitive traits.
-- Scraped data is cached locally only to reduce cost. Delete `.cache/` to clear it. A
-  production version should set a retention period in line with Thailand's PDPA.
+- Scraped data is cached locally only to reduce cost. Delete `.cache/` to clear it.
 - Every recommendation comes with a reason, and the final call stays with the
   influencer team. The tool shortlists; it does not decide.
 - Scraping must respect platform terms. The built-in scraper only opens public pages that
@@ -357,4 +356,3 @@ mock:
 - trafilatura: https://trafilatura.readthedocs.io
 - Playwright for Python: https://playwright.dev/python/
 - uv: https://docs.astral.sh/uv/
-- Thailand Personal Data Protection Act (PDPA) B.E. 2562 (2019)
