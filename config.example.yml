@@ -61,3 +61,12 @@ matching:
     audience_fit: 0.25
     engagement: 0.25
     tier_fit: 0.1
+
+# Experiment: export each ranking with a concat_desc text column, then compare an
+# embedding cosine ranking against it with scripts/compare_rankings.py.
+# Needs: uv sync --extra embedding
+embedding:
+  export_dir: ""            # e.g. .runs. Empty turns the export off.
+  model: BAAI/bge-m3
+  use_fp16: true           # true only on a GPU
+  max_length: 8192

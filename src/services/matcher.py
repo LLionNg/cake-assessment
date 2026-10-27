@@ -7,6 +7,7 @@ from src.data.schemas import CreatorAssessment, MatchReport
 from src.data.website import fetch_website_text
 from src.services.assessor import CreatorAssessor
 from src.services.discovery import CreatorDiscovery
+from src.services.export import export_run
 from src.services.profiler import BrandProfiler
 from src.services.scoring import build_match
 
@@ -43,6 +44,9 @@ class KOLMatcher:
             for c in creators
         ]
         matches.sort(key=lambda m: m.score, reverse=True)
+        if self.settings.embedding.export_dir:
+            run_dir = export_run(self.settings.embedding.export_dir, page, brand, matches)
+            log.info("Exported ranking datasheet to %s", run_dir)
         return MatchReport(
             brand=brand,
             matches=matches[: top_n or self.settings.matching.top_n],

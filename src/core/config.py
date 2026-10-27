@@ -83,6 +83,13 @@ class Weights(BaseModel):
     tier_fit: float = 0.1
 
 
+class EmbeddingSettings(BaseModel):
+    export_dir: str = ""
+    model: str = "BAAI/bge-m3"
+    use_fp16: bool = False
+    max_length: int = 8192
+
+
 class MatchingSettings(BaseModel):
     search_queries: int = 10
     hashtags: int = 10
@@ -105,6 +112,7 @@ class Settings(BaseModel):
     scraper: ScraperSettings = ScraperSettings()
     mock: MockSettings = MockSettings()
     matching: MatchingSettings = MatchingSettings()
+    embedding: EmbeddingSettings = EmbeddingSettings()
 
 
 def load_settings(path: str | Path = "config.yml") -> Settings:

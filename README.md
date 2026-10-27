@@ -50,11 +50,15 @@ convert-cake/
       text.py              Thai script detection, keyword helpers
       urls.py              URL parsing and redirect checks
       log.py               logging setup from config.yml
+      vectors.py           numpy cosine similarity
+  scripts/
+    compare_rankings.py    embedding experiment, see below
   tests/
     test_models.py         LLM models, settings, thread safety, timeout guard
     test_matcher.py        end-to-end mock run and service selection
     test_scoring.py        tiers, engagement, Thai signal, score weights
     test_scrapers.py       URL parsing and data mapping for the scrapers
+    test_embedding.py      cosine similarity, concat_desc, datasheet export
 ```
 
 1. **Brand profiling** - the Facebook page (intro, about, categories, followers) and the
@@ -288,6 +292,27 @@ mock:
   facebook_page: fixtures/facebook_page.json
   tiktok_creators: fixtures/tiktok_creators.json
 ```
+
+## Embedding experiment
+
+Tests whether ranking creators by embedding similarity to the brand could replace or
+support the LLM relevance score. It runs offline on exported rankings.
+
+1. Set `embedding.export_dir: .runs` in `config.yml`. Every match then writes
+   `.runs/<time>-<brand>/creators.csv` (scores plus a `concat_desc` column built from the
+   creator's name, bio and captions) and `brand.json` (brand profile, page and its
+   `concat_desc`).
+2. Install the extra dependencies once (PyTorch, FlagEmbedding) and run:
+
+```bash
+uv sync --extra embedding
+uv run python scripts/compare_rankings.py .runs/<run_dir>
+```
+
+The script embeds every `concat_desc` with BGE-M3 (`BAAI/bge-m3`, downloaded on first
+use), saves the vectors to `embeddings.npz`, ranks creators by cosine similarity to the
+brand and writes `creators_ranked.csv`. It prints the Spearman rank correlation between
+cosine and the app's `relevance`, `audience_fit` and `score`, plus the top 5 overlap.
 
 ## Key technical decisions
 
