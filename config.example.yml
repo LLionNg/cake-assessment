@@ -1,0 +1,61 @@
+# Copy to config.yml and fill in the keys. config.yml is ignored by git.
+# Leave a key empty to run that service in mock mode.
+
+# DEBUG, INFO, WARNING or ERROR
+log_level: INFO
+
+llm:
+  provider: anthropic
+  effort: medium # reasoning effort: low, medium or high. Empty for the model default.
+  max_tokens: 8000
+  timeout_s: 600
+
+  openai:
+    api_key: "" # OpenAI API key (sk-...), platform.openai.com/api-keys
+    model: gpt-5.4-mini
+
+  anthropic:
+    api_key: "" # Anthropic API key (sk-ant-...), console.anthropic.com
+    model: claude-haiku-5-5
+
+  google_vertex:
+    credentials_file: "" # path to the service account JSON, e.g. credentials/vertex.json
+    project_id: "" # empty: read from the credentials file
+    location: global # Vertex AI region, e.g. global or us-central1
+    model: gemini-2.5-flash-lite
+
+apify:
+  api_token: ""
+  tiktok_actor: clockworks/tiktok-scraper
+  facebook_actor: apify/facebook-pages-scraper
+  proxy_country: TH
+  max_charge_usd: 5.0
+  cache_dir: .cache
+
+scraper:
+  enabled: false # If true, apify is not used
+  headless: true
+  timeout_s: 30
+  delay_s: 1.5
+
+# enabled: true forces mock for every service.
+mock:
+  enabled: false
+  facebook_page: fixtures/facebook_page.json
+  tiktok_creators: fixtures/tiktok_creators.json
+
+matching:
+  videos_per_query: 5
+  videos_per_creator: 4
+  max_candidates: 15
+  top_n: 10
+  min_followers: 3000
+  max_followers: 5000000
+  min_thai_ratio: 0.3
+  engagement_benchmark: 0.08
+  assess_batch_size: 10
+  weights:
+    relevance: 0.4
+    audience_fit: 0.25
+    engagement: 0.25
+    tier_fit: 0.1

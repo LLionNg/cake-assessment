@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    image: kol-matcher
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./config.yml:/app/config.yml:ro
+      - ./credentials:/app/credentials:ro
+      - cache:/app/.cache
+    restart: unless-stopped
+
+volumes:
+  cache:
