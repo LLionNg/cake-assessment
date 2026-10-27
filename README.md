@@ -1,4 +1,4 @@
-# TikTok KOL Matcher - Thailand
+# TikTok KOL Matcher
 
 Prototype for the Convert Cake AI Engineer assessment. Give it a client's Facebook page
 (and optionally their website) and it returns a ranked list of Thai TikTok creators, with
