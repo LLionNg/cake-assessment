@@ -19,7 +19,7 @@ def get_matcher() -> KOLMatcher:
 
 matcher = get_matcher()
 
-st.title("TikTok KOL Matcher - Thailand")
+st.title("TikTok KOL Matcher")
 st.caption(f"Mode: {matcher.services.mode}. Set mock in config.yml to switch to mock data.")
 
 with st.form("inputs"):
