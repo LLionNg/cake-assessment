@@ -191,19 +191,13 @@ weights, so it stays between 0 and 1 even if the weights don't add up to 1:
 where $\omega$ are the `weights` and each part $s_i$ is between 0 and 1:
 
 ```math
-R = \text{relevance}, \qquad A = \text{audience fit} \quad \text{(both from the LLM)}
-```
-
-```math
-E = \min\left(\frac{\tilde{\epsilon}}{\epsilon_{\text{bench}}},\ 1\right)
-```
-
-```math
-\tilde{\epsilon} = \mathrm{median}_{v} \left( \frac{\text{likes}_v + \text{comments}_v + \text{shares}_v}{\text{views}_v} \right)
-```
-
-```math
-T = \begin{cases} 1.0 & \text{if the brand prefers the creator's tier} \\ 0.3 & \text{otherwise} \end{cases}
+\begin{aligned}
+R &= \text{relevance, from the LLM} \\
+A &= \text{audience fit, from the LLM} \\
+E &= \min\left(\frac{\tilde{\epsilon}}{\epsilon_{\text{bench}}},\ 1\right) \\
+\tilde{\epsilon} &= \mathrm{median}_{v} \left( \frac{\text{likes}_v + \text{comments}_v + \text{shares}_v}{\text{views}_v} \right) \\
+T &= \begin{cases} 1.0 & \text{if the brand prefers the creator's tier} \\ 0.3 & \text{otherwise} \end{cases}
+\end{aligned}
 ```
 
 Here $\tilde{\epsilon}$ is the median engagement rate over the creator's videos $v$, and
