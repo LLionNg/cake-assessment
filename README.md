@@ -172,6 +172,8 @@ CLI output.
 
 | Key                    | Default | Meaning                                                                 |
 |------------------------|---------|-------------------------------------------------------------------------|
+| `search_queries`       | 10      | TikTok search phrases the LLM writes per run, spread over six angles. Extra ones are dropped. |
+| `hashtags`             | 10      | TikTok hashtags the LLM writes per run. Each query and hashtag is one TikTok search. |
 | `min_thai_ratio`       | 0.3     | Minimum share of a creator's bio and videos with Thai script or a `TH` upload location. Creators below it are dropped as not Thai. |
 | `engagement_benchmark` | 0.08    | Engagement rate that earns a full engagement score. A creator at 4% scores 0.5; 8% or more scores 1.0. |
 | `assess_batch_size`    | 10      | Creators sent to the LLM per assessment call. Batches run in parallel, up to 4 at a time. |
@@ -236,16 +238,16 @@ llm:
 
 ### Cost per run
 
-The defaults keep one live match at about $0.35 on Apify, so the free plan's $5 monthly
-credit covers around 14 runs:
+The defaults keep one live match at about $0.40 on Apify, so the free plan's $5 monthly
+credit covers around 12 runs:
 
 | Step                | Results                                      | Price (Apify, 2026-10)      |
 |---------------------|----------------------------------------------|-----------------------------|
 | Facebook page       | 1 page                                       | $0.012 per page (free plan) |
-| TikTok search       | 13 to 20 queries and hashtags x 5 videos     | from $1.70 per 1,000        |
+| TikTok search       | 10 queries + 10 hashtags x 5 videos          | from $1.70 per 1,000        |
 | TikTok profiles     | 15 creators x 4 videos                       | from $1.70 per 1,000        |
 
-That is about 140 TikTok results, or $0.25 to $0.55 depending on the plan rate. The
+That is about 160 TikTok results, or $0.28 to $0.62 depending on the plan rate. The
 "from" price is the lowest tier, and the free plan rate is higher. Repeat runs with the
 same input are free thanks to the cache. Raise `matching.videos_per_query`,
 `max_candidates` and `videos_per_creator` for a wider search at a higher cost.

@@ -17,7 +17,7 @@ class KOLMatcher:
     def __init__(self, settings: Settings):
         self.settings = settings
         self.services = build_services(settings)
-        self.profiler = BrandProfiler(self.services.llm)
+        self.profiler = BrandProfiler(self.services.llm, settings.matching)
         self.discovery = CreatorDiscovery(self.services.tiktok, settings.matching)
         self.assessor = CreatorAssessor(self.services.llm, settings.matching.assess_batch_size)
 

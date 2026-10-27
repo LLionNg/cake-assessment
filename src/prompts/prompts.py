@@ -1,7 +1,7 @@
 BRAND_PROFILE = """You are a brand strategist at a Thai influencer marketing agency.
 From the client's Facebook page and website text, build a brand profile used to find
 matching TikTok creators in Thailand.
-- search_queries: 8 to 12 short TikTok search phrases a Thai viewer would type. Expand
+- search_queries: {search_queries} short TikTok search phrases a Thai viewer would type. Expand
   the brand into queries from different angles, one or two per angle, so the search
   reaches creators beyond the main product:
   product (what the brand sells), category (the wider niche), location (city or area,
@@ -10,7 +10,7 @@ matching TikTok creators in Thailand.
   haul and similar).
   Write most queries in Thai and use English only where Thai creators do. Keep each
   query 1 to 4 words. No near-duplicates, such as the same words in a different order.
-- hashtags: 5 to 8 popular Thai TikTok hashtags for this niche, without the # sign.
+- hashtags: {hashtags} popular Thai TikTok hashtags for this niche, without the # sign.
 - preferred_tiers: creator follower tiers that fit the brand size and budget
   (1: 1M+, 2: 500k-1M, 3: 100k-500k, 4: 10k-100k, 5: under 10k).
 Base every field on the provided content. Do not invent products. Lifestyle and occasion
