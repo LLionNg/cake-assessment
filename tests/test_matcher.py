@@ -1,8 +1,10 @@
 import pytest
 
-from src.core.config import Settings, load_settings
+from src.core.config import MatchingSettings, Settings, load_settings
 from src.core.container import build_services
+from src.data.schemas import BrandProfile, FacebookPage
 from src.services.matcher import KOLMatcher
+from src.services.profiler import BrandProfiler
 
 
 def test_mock_pipeline_ranks_relevant_thai_creators():
@@ -64,3 +66,32 @@ def test_scraper_never_builds_apify(monkeypatch):
     monkeypatch.setattr(apify, "ApifyRunner", fail)
     settings = Settings.model_validate({"apify": {"api_token": "t"}, "scraper": {"enabled": True}})
     assert build_services(settings).mode == "llm=mock, data=scraper"
+
+
+class EchoLLM:
+    def parse(self, system, payload, schema):
+        self.system = system
+        terms = [f"t{i}" for i in range(15)]
+        return BrandProfile(
+            brand_name="b",
+            industry="i",
+            summary="s",
+            products=[],
+            target_audience="a",
+            content_style="c",
+            search_queries=terms,
+            hashtags=terms,
+            preferred_tiers=[4],
+        )
+
+
+def test_profiler_uses_and_caps_configured_counts():
+    llm = EchoLLM()
+    settings = MatchingSettings(search_queries=3, hashtags=2)
+
+    brand = BrandProfiler(llm, settings).profile(FacebookPage(url="u"), "")
+
+    assert "- search_queries: 3 short" in llm.system
+    assert "- hashtags: 2 popular" in llm.system
+    assert len(brand.search_queries) == 3
+    assert len(brand.hashtags) == 2

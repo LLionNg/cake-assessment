@@ -84,6 +84,8 @@ class Weights(BaseModel):
 
 
 class MatchingSettings(BaseModel):
+    search_queries: int = 10
+    hashtags: int = 10
     videos_per_query: int = 5
     videos_per_creator: int = 4
     max_candidates: int = 15

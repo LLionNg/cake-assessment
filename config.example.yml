@@ -45,6 +45,8 @@ mock:
   tiktok_creators: fixtures/tiktok_creators.json
 
 matching:
+  search_queries: 10        # TikTok search phrases the LLM writes per run
+  hashtags: 10              # TikTok hashtags the LLM writes per run
   videos_per_query: 5
   videos_per_creator: 4
   max_candidates: 15
