@@ -183,25 +183,28 @@ CLI output.
 The final score is the weighted average of the four parts, divided by the sum of the
 weights, so it stays between 0 and 1 even if the weights don't add up to 1:
 
-$$
+```math
 \text{score} = \frac{\sum_{i} \omega_i \, s_i}{\sum_{i} \omega_i}
 = \frac{\omega_R R + \omega_A A + \omega_E E + \omega_T T}{\omega_R + \omega_A + \omega_E + \omega_T}
-$$
+```
 
 where $\omega$ are the `weights` and each part $s_i$ is between 0 and 1:
 
-$$
+```math
 R = \text{relevance}, \qquad A = \text{audience fit} \quad \text{(both from the LLM)}
-$$
+```
 
-$$
-E = \min\left(\frac{\tilde{\epsilon}}{\epsilon_{\text{bench}}},\ 1\right), \qquad
-\tilde{\epsilon} = \operatorname{median}_{v}\ \frac{\text{likes}_v + \text{comments}_v + \text{shares}_v}{\text{views}_v}
-$$
+```math
+E = \min\left(\frac{\tilde{\epsilon}}{\epsilon_{\text{bench}}},\ 1\right)
+```
 
-$$
-T = \begin{cases} 1.0 & \text{if the creator's tier is preferred by the brand} \\ 0.3 & \text{otherwise} \end{cases}
-$$
+```math
+\tilde{\epsilon} = \mathrm{median}_{v} \left( \frac{\text{likes}_v + \text{comments}_v + \text{shares}_v}{\text{views}_v} \right)
+```
+
+```math
+T = \begin{cases} 1.0 & \text{if the brand prefers the creator's tier} \\ 0.3 & \text{otherwise} \end{cases}
+```
 
 Here $\tilde{\epsilon}$ is the median engagement rate over the creator's videos $v$, and
 $\epsilon_{\text{bench}}$ is `engagement_benchmark`.
