@@ -16,8 +16,6 @@ class Services:
 
 
 def build_services(settings: Settings) -> Services:
-    """LLM: the chosen provider when it has credentials, else mock.
-    Data: scraper if enabled, else Apify if it has a token, else mock. Mock wins over all."""
     live = not settings.mock.enabled
 
     if live and settings.llm.has_credentials:

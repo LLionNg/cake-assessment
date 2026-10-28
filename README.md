@@ -172,7 +172,7 @@ CLI output.
 
 | Key                    | Default | Meaning                                                                 |
 |------------------------|---------|-------------------------------------------------------------------------|
-| `search_queries`       | 10      | TikTok search phrases the LLM writes per run, spread over six angles. Extra ones are dropped. |
+| `search_queries`       | 10      | TikTok search phrases the LLM writes per run. |
 | `hashtags`             | 10      | TikTok hashtags the LLM writes per run. Each query and hashtag is one TikTok search. |
 | `min_thai_ratio`       | 0.3     | Minimum share of a creator's bio and videos with Thai script or a `TH` upload location. Creators below it are dropped as not Thai. |
 | `engagement_benchmark` | 0.08    | Engagement rate that earns a full engagement score. A creator at 4% scores 0.5; 8% or more scores 1.0. |
