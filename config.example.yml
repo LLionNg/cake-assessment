@@ -5,7 +5,7 @@
 log_level: INFO
 
 llm:
-  provider: anthropic
+  provider: anthropic # openai, anthropic or google-vertex
   effort: medium # reasoning effort: low, medium or high. Empty for the model default.
   max_tokens: 8000
   timeout_s: 600

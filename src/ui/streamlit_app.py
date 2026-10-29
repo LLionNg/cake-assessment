@@ -25,7 +25,10 @@ st.caption(f"Mode: {matcher.services.mode}. Set mock in config.yml to switch to 
 with st.form("inputs"):
     facebook_url = st.text_input("Facebook page URL", "https://www.facebook.com/example")
     website_url = st.text_input("Website URL (optional)")
-    top_n = st.slider("Number of KOLs", 5, 30, matcher.settings.matching.top_n)
+    limits = matcher.settings.matching
+    top_n = st.slider(
+        "Number of KOLs", 1, limits.max_candidates, min(limits.top_n, limits.max_candidates)
+    )
     submitted = st.form_submit_button("Find KOLs", type="primary")
 
 if submitted:
