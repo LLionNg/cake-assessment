@@ -10,6 +10,7 @@ RUN uv sync --frozen --no-dev --no-install-project
 
 COPY src ./src
 COPY fixtures ./fixtures
+COPY .streamlit ./.streamlit
 RUN uv sync --frozen --no-dev && playwright install --with-deps chromium
 
 COPY config.example.yml ./config.yml

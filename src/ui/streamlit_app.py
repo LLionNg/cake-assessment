@@ -65,10 +65,13 @@ if submitted:
                 "engagement_rate": st.column_config.NumberColumn("ER", format="percent"),
             },
         )
-        st.download_button("Download CSV", df.to_csv(index=False), "kol_matches.csv", "text/csv")
+        st.download_button(
+            "Download CSV", df.to_csv(index=False), "kol_matches.csv", "text/csv", on_click="ignore"
+        )
         st.download_button(
             "Download JSON",
             report.model_dump_json(indent=2),
             "kol_matches.json",
             "application/json",
+            on_click="ignore",
         )

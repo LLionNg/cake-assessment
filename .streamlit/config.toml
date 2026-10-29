@@ -1,0 +1,12 @@
+# Colors and fonts from convertcake.com
+[theme]
+base = "light"
+primaryColor = "#0536D2"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F4F5F7"
+textColor = "#2D303C"
+linkColor = "#0536D2"
+borderColor = "#E3E8FF"
+baseRadius = "8px"
+font = "Noto Sans Thai:https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&display=swap"
+headingFont = "Manrope:https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&display=swap"
