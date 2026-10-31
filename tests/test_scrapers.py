@@ -1,6 +1,7 @@
 import pytest
 
 from src.core.config import ScraperSettings
+from src.data import website
 from src.data.schemas import Creator, Video
 from src.scrapers.browser import ScraperError
 from src.scrapers.facebook import is_post, page_url, parse_page
@@ -168,3 +169,17 @@ def test_same_path_spots_redirects(current, requested, same):
 def test_parse_url_accepts_links_without_scheme():
     assert parse_url("facebook.com/brand/about").netloc == "facebook.com"
     assert parse_url("https://m.facebook.com/brand").path == "/brand"
+
+
+def test_website_fetch_adds_missing_scheme(monkeypatch):
+    requested = []
+
+    def fake_get(url, **kwargs):
+        requested.append(url)
+        return website.httpx.Response(
+            200, text="<p>Cafe</p>", request=website.httpx.Request("GET", url)
+        )
+
+    monkeypatch.setattr(website.httpx, "get", fake_get)
+    website.fetch_website_text(" example.com/about ")
+    assert requested == ["https://example.com/about"]
